@@ -1,0 +1,18 @@
+{
+  "npmScope": "calvin-assessment",
+  "implicitDependencies": {
+    "angular.json": "*",
+    "package.json": "*",
+    "tsconfig.json": "*",
+    "tslint.json": "*",
+    "nx.json": "*"
+  },
+  "projects": {
+    "calvin-assessment-e2e": {
+      "tags": []
+    },
+    "calvin-assessment": {
+      "tags": []
+    }
+  }
+}
