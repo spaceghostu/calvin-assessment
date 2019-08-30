@@ -1,11 +1,11 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
+import { ContactsComponent } from './pages/contacts/contacts.component';
 
 const routes: Routes = [
   {
     path: 'contacts',
-    //  TODO: Generate Contacts Component
-    // component: ContactsComponent,
+    component: ContactsComponent,
   },
   {
     path: '',
