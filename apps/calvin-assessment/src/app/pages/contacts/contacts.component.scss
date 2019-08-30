@@ -1,0 +1,10 @@
+.error {
+    padding: 50px 0;
+    display: flex;
+    flex-flow: column;
+    align-items: center;
+    span {
+        margin: 10px 0;
+        font-size: 14px;
+    }
+}

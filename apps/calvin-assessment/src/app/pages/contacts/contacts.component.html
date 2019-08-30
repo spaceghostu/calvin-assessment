@@ -1,7 +1,7 @@
-<div [mdcElevation]="2">
+<div [mdcElevation]="2"
+  *ngIf="loaded$|async">
   <mdc-list twoLine
-            avatar
-            class="demo-list--custom">
+            avatar>
     <mdc-list-item *ngFor="let contact of contacts$|async">
       <img [src]="contact.picture"
            mdcListItemGraphic />
@@ -14,4 +14,17 @@
          title="More info">info</a>
     </mdc-list-item>
   </mdc-list>
+</div>
+
+<div class="loader"
+  *ngIf="!(loaded$|async) && !(error$|async)">
+  <mdc-linear-progress></mdc-linear-progress>
+</div>
+
+<div class="error"
+  *ngIf="error$|async">
+  <mdc-icon>error</mdc-icon>
+  <span>{{error$|async}}</span>
+  <button mdc-button
+    (click)="handleRetry()">Retry</button>
 </div>
