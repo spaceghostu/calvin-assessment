@@ -3,6 +3,7 @@ import { ContactsAction, ContactsActionTypes } from './contacts.actions';
 export const CONTACTS_FEATURE_KEY = 'contacts';
 
 export interface Entity {
+  id: string,
   index: number,
   picture: string,
   name: {
