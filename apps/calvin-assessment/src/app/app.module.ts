@@ -8,6 +8,7 @@ import { AppComponent } from './app.component';
 import { MaterialsModule } from './materials/materials.module';
 import { AppRoutingModule } from './app-routing.module';
 import { PagesModule } from './pages/pages.module';
+import { ContactsModule } from './contacts/contacts.module';
 
 @NgModule({
   declarations: [AppComponent],
@@ -18,6 +19,7 @@ import { PagesModule } from './pages/pages.module';
     PagesModule,
     AngularFireModule.initializeApp(environment.firebaseConfig),
     AngularFirestoreModule,
+    ContactsModule,
   ],
   providers: [],
   bootstrap: [AppComponent]
