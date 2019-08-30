@@ -1,1 +1,17 @@
-<p>{{contacts$ | async | json}}</p>
+<div [mdcElevation]="2">
+  <mdc-list twoLine
+            avatar
+            class="demo-list--custom">
+    <mdc-list-item *ngFor="let contact of contacts$|async">
+      <img [src]="contact.picture"
+           mdcListItemGraphic />
+      <mdc-list-item-text [secondaryText]="contact.phone">{{contact.name.first}} {{contact.name.last}}
+      </mdc-list-item-text>
+      <a href="#/list-demo/examples"
+         mdcListItemMeta
+         mdcIcon
+         aria-label="View more"
+         title="More info">info</a>
+    </mdc-list-item>
+  </mdc-list>
+</div>
