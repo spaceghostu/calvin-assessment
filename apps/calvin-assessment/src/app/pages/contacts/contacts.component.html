@@ -2,13 +2,13 @@
   *ngIf="loaded$|async">
   <mdc-list twoLine
             avatar>
-    <mdc-list-item *ngFor="let contact of contacts$|async">
+    <mdc-list-item *ngFor="let contact of contacts$|async"
+      [routerLink]="['/contact', contact.id]">
       <img [src]="contact.picture"
            mdcListItemGraphic />
       <mdc-list-item-text [secondaryText]="contact.phone">{{contact.name.first}} {{contact.name.last}}
       </mdc-list-item-text>
-      <a href="#/list-demo/examples"
-         mdcListItemMeta
+      <a mdcListItemMeta
          mdcIcon
          aria-label="View more"
          title="More info">info</a>
