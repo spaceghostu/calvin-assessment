@@ -11,6 +11,7 @@ import {
   ContactsActionTypes
 } from './contacts.actions';
 import { AngularFirestore } from '@angular/fire/firestore';
+import { ContactsService } from '../contacts.service';
 
 @Injectable()
 export class ContactsEffects {
@@ -18,7 +19,7 @@ export class ContactsEffects {
     ContactsActionTypes.LoadContacts,
     {
       run: (action: LoadContacts, state: ContactsPartialState) => {
-        return this.afs.collection<Entity>('contacts').valueChanges().pipe(
+        return this.contactsService.getContacts().pipe(
           map((action: any) => {
             return new ContactsLoaded(action)
           })
@@ -34,6 +35,6 @@ export class ContactsEffects {
 
   constructor(
     private dataPersistence: DataPersistence<ContactsPartialState>,
-    private afs: AngularFirestore,
+    private contactsService: ContactsService,
   ) {}
 }
