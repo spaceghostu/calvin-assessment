@@ -1,35 +1,25 @@
 import { ContactsLoaded } from './contacts.actions';
 import {
   ContactsState,
-  Entity,
   initialState,
   reducer
 } from './contacts.reducer';
+import { generateContact } from './contacts.utils';
 
 describe('Contacts Reducer', () => {
-  const getContactsId = it => it['id'];
-  let createContacts;
-
-  beforeEach(() => {
-    createContacts = (id: string, name = ''): Entity => ({
-      id,
-      name: name || `name-${id}`
-    });
-  });
 
   describe('valid Contacts actions ', () => {
     it('should return set the list of known Contacts', () => {
-      const contactss = [
-        createContacts('PRODUCT-AAA'),
-        createContacts('PRODUCT-zzz')
+      const contacts = [
+        generateContact(),
+        generateContact(),
       ];
-      const action = new ContactsLoaded(contactss);
+      const action = new ContactsLoaded(contacts);
       const result: ContactsState = reducer(initialState, action);
-      const selId: string = getContactsId(result.list[1]);
 
       expect(result.loaded).toBe(true);
       expect(result.list.length).toBe(2);
-      expect(selId).toBe('PRODUCT-zzz');
+      expect(result.list).toBe(contacts);
     });
   });
 

@@ -1,9 +1,9 @@
-import { TestBed, async } from '@angular/core/testing';
+import { TestBed } from '@angular/core/testing';
 
-import { Observable, of } from 'rxjs';
+import { Observable } from 'rxjs';
 
-import { EffectsModule, Actions } from '@ngrx/effects';
-import { StoreModule, Store } from '@ngrx/store';
+import { EffectsModule } from '@ngrx/effects';
+import { StoreModule } from '@ngrx/store';
 import { provideMockActions } from '@ngrx/effects/testing';
 
 import { NxModule, DataPersistence } from '@nrwl/angular';
@@ -11,30 +11,8 @@ import { hot, cold } from '@nrwl/angular/testing';
 
 import { ContactsEffects } from './contacts.effects';
 import { LoadContacts, ContactsLoaded } from './contacts.actions';
-import { Action } from 'rxjs/internal/scheduler/Action';
 import { ContactsService } from '../contacts.service';
-import { Entity } from './contacts.reducer';
-import * as faker from 'faker/locale/en_US';
-
-export const generateContact = (): Entity => {
-  return {
-    index: faker.random.number(),
-    name: {
-      first: faker.name.firstName(),
-      last: faker.name.lastName()
-    },
-    picture: faker.image.imageUrl(),
-    company: faker.company.companyName(),
-    email: faker.internet.email(),
-    phone: faker.phone.phoneNumber(),
-  };
-};
-
-export const generateContacts = (
-  count = faker.random.number({ min: 1, max: 20 })
-): Entity[] => {
-  return Array.apply(null, Array(count)).map(() => generateContact());
-};
+import { generateContacts } from './contacts.utils';
 
 describe('ContactsEffects', () => {
   let actions: Observable<any>;
@@ -47,6 +25,10 @@ describe('ContactsEffects', () => {
         NxModule.forRoot(),
         StoreModule.forRoot({}),
         EffectsModule.forRoot([]),
+      ],
+      providers: [
+        ContactsEffects,
+        DataPersistence,
         provideMockActions(() => actions),
         {
           provide: ContactsService,
@@ -54,11 +36,6 @@ describe('ContactsEffects', () => {
             getContacts: jest.fn(),
           }
         }
-      ],
-      providers: [
-        ContactsEffects,
-        DataPersistence,
-        provideMockActions(() => actions)
       ]
     });
 
