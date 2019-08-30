@@ -2,13 +2,6 @@ import { ContactsAction, ContactsActionTypes } from './contacts.actions';
 
 export const CONTACTS_FEATURE_KEY = 'contacts';
 
-/**
- * Interface for the 'Contacts' data used in
- *  - ContactsState, and the reducer function
- *
- *  Note: replace if already defined in another module
- */
-
 export interface Entity {
   index: number,
   picture: string,
@@ -22,10 +15,10 @@ export interface Entity {
 }
 
 export interface ContactsState {
-  list: Entity[]; // list of Contacts; analogous to a sql normalized table
-  selectedId?: string | number; // which Contacts record has been selected
-  loaded: boolean; // has the Contacts list been loaded
-  error?: any; // last none error (if any)
+  list: Entity[];
+  selectedId?: string | number;
+  loaded: boolean;
+  error?: any;
 }
 
 export interface ContactsPartialState {
@@ -42,14 +35,30 @@ export function reducer(
   action: ContactsAction
 ): ContactsState {
   switch (action.type) {
+    case ContactsActionTypes.LoadContacts: {
+      return {
+        ...state,
+        list: [],
+        loaded: false,
+        error: null,
+      }
+    }
     case ContactsActionTypes.ContactsLoaded: {
-      state = {
+      return {
         ...state,
         list: action.payload,
         loaded: true
       };
-      break;
+    }
+    case ContactsActionTypes.ContactsLoadError: {
+      return {
+        ...state,
+        loaded: false,
+        error: action.payload,
+      }
+    }
+    default: {
+      return state;
     }
   }
-  return state;
 }

@@ -27,7 +27,6 @@ export class ContactsEffects {
       },
 
       onError: (action: LoadContacts, error) => {
-        console.error('Error', error);
         return new ContactsLoadError(error);
       }
     }
