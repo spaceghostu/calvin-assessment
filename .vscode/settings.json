@@ -1,6 +1,9 @@
 {
     "cSpell.words": [
         "angularfire",
-        "firestore"
+        "devtools",
+        "firestore",
+        "ngrx",
+        "nrwl"
     ]
 }

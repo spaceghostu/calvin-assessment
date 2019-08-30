@@ -1,14 +1,16 @@
 import { Injectable } from '@angular/core';
-import { Effect, Actions } from '@ngrx/effects';
+import { Effect } from '@ngrx/effects';
 import { DataPersistence } from '@nrwl/angular';
+import { map } from 'rxjs/operators';
 
-import { ContactsPartialState } from './contacts.reducer';
+import { ContactsPartialState, Entity } from './contacts.reducer';
 import {
   LoadContacts,
   ContactsLoaded,
   ContactsLoadError,
   ContactsActionTypes
 } from './contacts.actions';
+import { AngularFirestore } from '@angular/fire/firestore';
 
 @Injectable()
 export class ContactsEffects {
@@ -16,8 +18,11 @@ export class ContactsEffects {
     ContactsActionTypes.LoadContacts,
     {
       run: (action: LoadContacts, state: ContactsPartialState) => {
-        // Your custom REST 'load' logic goes here. For now just return an empty list...
-        return new ContactsLoaded([]);
+        return this.afs.collection<Entity>('contacts').valueChanges().pipe(
+          map((action: any) => {
+            return new ContactsLoaded(action)
+          })
+        )
       },
 
       onError: (action: LoadContacts, error) => {
@@ -28,7 +33,7 @@ export class ContactsEffects {
   );
 
   constructor(
-    private actions$: Actions,
-    private dataPersistence: DataPersistence<ContactsPartialState>
+    private dataPersistence: DataPersistence<ContactsPartialState>,
+    private afs: AngularFirestore,
   ) {}
 }

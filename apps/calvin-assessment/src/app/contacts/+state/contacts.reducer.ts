@@ -9,8 +9,18 @@ export const CONTACTS_FEATURE_KEY = 'contacts';
  *  Note: replace if already defined in another module
  */
 
-/* tslint:disable:no-empty-interface */
-export interface Entity {}
+export interface Entity {
+  id: string,
+  index: number,
+  picture: string,
+  name: {
+    first: string,
+    last: string,
+  },
+  company: string,
+  email: string,
+  phone: string,
+}
 
 export interface ContactsState {
   list: Entity[]; // list of Contacts; analogous to a sql normalized table
