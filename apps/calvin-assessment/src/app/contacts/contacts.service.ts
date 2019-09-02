@@ -12,4 +12,9 @@ export class ContactsService {
   geAll() {
     return this.afs.collection<Entity>('contacts').stateChanges();
   }
+
+  update(contact) {
+    const {id, ...data} = contact;
+    return this.afs.doc(`/contacts/${id}`).update(data);
+  }
 }

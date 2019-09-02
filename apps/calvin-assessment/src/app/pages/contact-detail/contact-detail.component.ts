@@ -8,6 +8,9 @@ import {
 } from '../../contacts/+state/contacts.actions';
 import { contactsQuery } from '../../contacts/+state/contacts.selectors';
 import { Observable } from 'rxjs';
+import { take } from 'rxjs/operators';
+import { ContactsService } from '../../contacts/contacts.service';
+import { MdcSnackbar } from '@angular-mdc/web';
 
 @Component({
   selector: 'calvin-assessment-contact-detail',
@@ -17,11 +20,16 @@ import { Observable } from 'rxjs';
 export class ContactDetailComponent implements OnInit {
   contact$: Observable<Entity>;
   loaded$: Observable<Boolean>;
+  editMode = false;
+
+  contactSnapshot: Entity;
 
   constructor(
     private route: ActivatedRoute,
     private store: Store<ContactsState>,
-    private sanitizer: Sanitizer
+    private sanitizer: Sanitizer,
+    private contactsService: ContactsService,
+    private snackbar: MdcSnackbar
   ) {
     this.store.dispatch(new SelectContact(this.route.snapshot.params['id']));
     this.contact$ = this.store.select(contactsQuery.getSelectedContacts);
@@ -30,7 +38,7 @@ export class ContactDetailComponent implements OnInit {
       if (!loaded) {
         this.store.dispatch(new LoadContacts());
       }
-    })
+    });
   }
 
   ngOnInit() {}
@@ -44,5 +52,22 @@ export class ContactDetailComponent implements OnInit {
       );
     });
     return style;
+  }
+
+  handleEdit() {
+    this.contact$.pipe(take(1)).subscribe(contact => {
+      this.contactSnapshot = contact;
+    });
+    this.editMode = true;
+  }
+
+  handleSave() {
+    this.contactsService.update(this.contactSnapshot).then(() => {
+      this.snackbar.open('Contact Saved');
+    });
+    this.editMode = false;
+  }
+  handleCancel() {
+    this.editMode = false;
   }
 }
