@@ -17,4 +17,9 @@ export class ContactsService {
     const {id, ...data} = contact;
     return this.afs.doc(`/contacts/${id}`).update(data);
   }
+  
+  delete(contact) {
+    const { id } = contact;
+    return this.afs.doc(`/contacts/${id}`).delete();
+  }
 }

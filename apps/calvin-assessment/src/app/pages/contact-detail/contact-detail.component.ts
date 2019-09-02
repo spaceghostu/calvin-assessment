@@ -1,5 +1,5 @@
 import { Component, OnInit, Sanitizer, SecurityContext } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { Store } from '@ngrx/store';
 import { ContactsState, Entity } from '../../contacts/+state/contacts.reducer';
 import {
@@ -29,7 +29,8 @@ export class ContactDetailComponent implements OnInit {
     private store: Store<ContactsState>,
     private sanitizer: Sanitizer,
     private contactsService: ContactsService,
-    private snackbar: MdcSnackbar
+    private snackbar: MdcSnackbar,
+    private router: Router
   ) {
     this.store.dispatch(new SelectContact(this.route.snapshot.params['id']));
     this.contact$ = this.store.select(contactsQuery.getSelectedContacts);
@@ -69,5 +70,22 @@ export class ContactDetailComponent implements OnInit {
   }
   handleCancel() {
     this.editMode = false;
+  }
+  handleDelete() {
+    if (!this.contactSnapshot) {
+      this.contact$.pipe(take(1)).subscribe(contact => {
+        this.contactSnapshot = contact;
+      });
+    }
+    const snackbarRef = this.snackbar.open('Contact Deleted', 'Undo', {
+      timeoutMs: 10000,
+      dismiss: true
+    });
+    snackbarRef.afterDismiss().subscribe(reason => {
+      if ((reason = 'dismiss')) {
+        this.contactsService.delete(this.contactSnapshot);
+        this.router.navigate(['/contacts']);
+      }
+    });
   }
 }

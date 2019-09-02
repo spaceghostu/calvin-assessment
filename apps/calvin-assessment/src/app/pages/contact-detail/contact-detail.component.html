@@ -57,17 +57,18 @@
                     (click)="handleSave()"
                     mdcCardAction="button">Save</button>
             <button mdc-button
-                    (click)="handleCancel()"
+                    (click)="toggleEdit()"
                     mdcCardAction="button">Cancel</button>
         </mdc-card-action-buttons>
         <mdc-card-action-icons>
             <button mdcIconButton
                     *ngIf="!editMode"
                     mdcCardAction="icon"
-                    (click)="handleEdit()"
+                    (click)="toggleEdit()"
                     icon="create"></button>
             <button mdcIconButton
                     mdcCardAction="icon"
+                    (click)="handleDelete()"
                     icon="delete"></button>
         </mdc-card-action-icons>
     </mdc-card-actions>
