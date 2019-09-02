@@ -1,4 +1,5 @@
 <div [mdcElevation]="2"
+     class="contact-list"
      *ngIf="loaded$|async">
   <mdc-text-field (input)="filter=$event"
                   class="filter"

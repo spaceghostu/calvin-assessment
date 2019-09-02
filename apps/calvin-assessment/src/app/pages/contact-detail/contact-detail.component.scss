@@ -1,4 +1,3 @@
-
 .name {
   padding: 20px;
 }
@@ -7,9 +6,12 @@
   padding: 0 30px;
 }
 .back-button {
-  width: 100%;
   height: 60px;
-  margin-top: 20px;
+  width: 100%;
+  min-width: 300px;
+  max-width: 600px;
+  margin: 20px auto;
+  display: block;
 }
 .mdc-text-field {
   margin: 5px;
@@ -20,10 +22,18 @@
   }
 }
 .mdc-list-item {
-    .input {
-        width: 100%;
-        .mdc-text-field {
-            width: 100%;
-        }
+  .input {
+    width: 100%;
+    .mdc-text-field {
+      width: 100%;
     }
+  }
+}
+
+.card {
+  display: block;
+  font-family: sans-serif;
+  min-width: 300px;
+  max-width: 600px;
+  margin: 50px auto;
 }
