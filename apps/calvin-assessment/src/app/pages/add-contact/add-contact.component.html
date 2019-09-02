@@ -1,0 +1,28 @@
+<div class="form"
+     [mdcElevation]="3">
+
+
+    <mdc-text-field label="First Name"
+                    (input)="contactSnapshot.firstname=$event"
+                    [value]="contactSnapshot.firstname"></mdc-text-field>
+    <mdc-text-field label="Last Name"
+                    (input)="contactSnapshot.lastname=$event"
+                    [value]="contactSnapshot.lastname"></mdc-text-field>
+    <mdc-text-field label="Company"
+                    (input)="contactSnapshot.company=$event"
+                    [value]="contactSnapshot.company"></mdc-text-field>
+
+    <mdc-text-field label="Phone"
+                    (input)="contactSnapshot.phone=$event"
+                    [value]="contactSnapshot.phone"></mdc-text-field>
+
+    <mdc-text-field label="Email"
+                    (input)="contactSnapshot.email=$event"
+                    [value]="contactSnapshot.email"></mdc-text-field>
+    <button class="button"
+            (click)="handleAdd()"
+            mdc-button>Add</button>
+    <button class="button"
+            [routerLink]="['/contacts']"
+            mdc-button>Cancel</button>
+</div>

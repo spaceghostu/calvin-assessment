@@ -6,6 +6,9 @@
                   [value]="filter"></mdc-text-field>
   <mdc-list twoLine
             avatar>
+    <mdc-list-item [routerLink]="['/contact', 'new']">
+      <mdc-icon mdcListItemGraphic>add</mdc-icon>Add
+    </mdc-list-item>
     <mdc-list-item *ngFor="let contact of contacts$ | async | filter:filter"
                    [routerLink]="['/contact', contact.id]">
       <img [src]="contact.picture"

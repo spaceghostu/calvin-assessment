@@ -3,7 +3,7 @@ import { Entity } from './contacts.reducer';
 
 export const generateContact = (): Entity => {
   return {
-    id: faker.id(),
+    id: faker.random.uuid(),
     index: faker.random.number(),
     firstname: faker.name.firstName(),
     lastname: faker.name.lastName(),
