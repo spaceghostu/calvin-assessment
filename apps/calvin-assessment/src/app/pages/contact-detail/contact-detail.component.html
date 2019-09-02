@@ -1,1 +1,38 @@
-<p>contact-detail works!</p>
+<mdc-card *ngIf="contact$|async">
+    <mdc-card-primary-action>
+        <mdc-card-media wide
+                        disableRipple
+                        [style.backgroundImage]="sanitizedPicture()"></mdc-card-media>
+        <div class="name">
+            <h2 mdcHeadline6>{{(contact$|async).name.first}} {{(contact$|async).name.last}}</h2>
+            <span>{{(contact$|async).company}}</span>
+        </div>
+        <div class="details"
+             mdcBody2>
+            <mdc-list disableRipple>
+                <mdc-list-item>
+                    <mdc-icon mdcListItemGraphic>phone</mdc-icon>
+                    {{(contact$|async).phone}}
+                </mdc-list-item>
+                <mdc-list-item>
+                    <mdc-icon mdcListItemGraphic>email</mdc-icon>
+                    {{(contact$|async).email}}
+                </mdc-list-item>
+            </mdc-list>
+        </div>
+    </mdc-card-primary-action>
+    <mdc-card-actions>
+        <mdc-card-action-icons>
+            <button mdcIconButton
+                    mdcCardAction="icon"
+                    icon="create"></button>
+            <button mdcIconButton
+                    mdcCardAction="icon"
+                    icon="delete"></button>
+        </mdc-card-action-icons>
+    </mdc-card-actions>
+</mdc-card>
+<button class="back-button"
+        mdc-button
+        primary
+        [routerLink]="['/contacts']">Back</button>

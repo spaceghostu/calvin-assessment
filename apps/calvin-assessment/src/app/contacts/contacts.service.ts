@@ -9,7 +9,7 @@ export class ContactsService {
 
   constructor(private afs: AngularFirestore) { }
 
-  getContacts() {
+  geAll() {
     return this.afs.collection<Entity>('contacts').stateChanges();
   }
 }

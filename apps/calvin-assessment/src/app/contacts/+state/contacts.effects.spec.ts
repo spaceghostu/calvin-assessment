@@ -33,7 +33,7 @@ describe('ContactsEffects', () => {
         {
           provide: ContactsService,
           useValue: {
-            getContacts: jest.fn(),
+            geAll: jest.fn(),
           }
         }
       ]
@@ -52,7 +52,7 @@ describe('ContactsEffects', () => {
       actions = hot('-a', { a: action });
       const response = cold('-a|', { a: contacts });
       const expected = cold('--b', { b: outcome });
-      contactsService.getContacts = jest.fn(() => response);
+      contactsService.geAll = jest.fn(() => response);
 
       expect(effects.loadContacts$).toBeObservable(expected);
     });

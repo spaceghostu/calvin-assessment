@@ -5,7 +5,7 @@ import { map, catchError, mergeMap } from 'rxjs/operators';
 import {
   ContactsLoaded,
   ContactsLoadError,
-  ContactsActionTypes
+  ContactsActionTypes,
 } from './contacts.actions';
 import { ContactsService } from '../contacts.service';
 import { Actions } from '@ngrx/effects';
@@ -18,7 +18,7 @@ export class ContactsEffects {
     this.actions$.pipe(
       ofType(ContactsActionTypes.LoadContacts),
       mergeMap(action =>
-        this.contactsService.getContacts().pipe(
+        this.contactsService.geAll().pipe(
           map(res =>
             res.map(item => ({
               id: item.payload.doc.id,

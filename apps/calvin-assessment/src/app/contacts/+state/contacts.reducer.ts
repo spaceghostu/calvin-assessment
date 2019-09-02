@@ -17,7 +17,8 @@ export interface Entity {
 
 export interface ContactsState {
   list: Entity[];
-  selectedId?: string | number;
+  selectedID?: string;
+  selected?: Entity;
   loaded: boolean;
   error?: any;
 }
@@ -39,7 +40,6 @@ export function reducer(
     case ContactsActionTypes.LoadContacts: {
       return {
         ...state,
-        list: [],
         loaded: false,
         error: null,
       }
@@ -56,6 +56,12 @@ export function reducer(
         ...state,
         loaded: false,
         error: action.payload,
+      }
+    }
+    case ContactsActionTypes.SelectContact: {
+      return {
+        ...state,
+        selectedID: action.payload,
       }
     }
     default: {

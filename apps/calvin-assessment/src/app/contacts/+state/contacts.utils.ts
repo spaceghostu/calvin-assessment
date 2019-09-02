@@ -3,6 +3,7 @@ import { Entity } from './contacts.reducer';
 
 export const generateContact = (): Entity => {
   return {
+    id: faker.id(),
     index: faker.random.number(),
     name: {
       first: faker.name.firstName(),

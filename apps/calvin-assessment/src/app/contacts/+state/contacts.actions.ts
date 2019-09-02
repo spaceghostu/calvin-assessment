@@ -4,7 +4,8 @@ import { Entity } from './contacts.reducer';
 export enum ContactsActionTypes {
   LoadContacts = '[Contacts] Load Contacts',
   ContactsLoaded = '[Contacts] Contacts Loaded',
-  ContactsLoadError = '[Contacts] Contacts Load Error'
+  ContactsLoadError = '[Contacts] Contacts Load Error',
+  SelectContact = '[Contacts] Select Contact',
 }
 
 export class LoadContacts implements Action {
@@ -21,10 +22,21 @@ export class ContactsLoaded implements Action {
   constructor(public payload: Entity[]) {}
 }
 
-export type ContactsAction = LoadContacts | ContactsLoaded | ContactsLoadError;
+export class SelectContact implements Action {
+  readonly type = ContactsActionTypes.SelectContact;
+  constructor(public payload: string) {}
+}
+
+
+export type ContactsAction =
+  | LoadContacts
+  | ContactsLoaded
+  | ContactsLoadError
+  | SelectContact;
 
 export const fromContactsActions = {
   LoadContacts,
   ContactsLoaded,
-  ContactsLoadError
+  ContactsLoadError,
+  SelectContact,
 };

@@ -6,7 +6,10 @@ import {
   MdcIconModule,
   MdcElevationModule,
   MdcButtonModule,
-  MdcLinearProgressModule
+  MdcLinearProgressModule,
+  MdcCardModule,
+  MdcIconButtonModule,
+  MdcTypographyModule
 } from '@angular-mdc/web';
 
 @NgModule({
@@ -19,6 +22,9 @@ import {
     MdcElevationModule,
     MdcButtonModule,
     MdcLinearProgressModule,
+    MdcCardModule,
+    MdcIconButtonModule,
+    MdcTypographyModule,
   ]
 })
 export class MaterialsModule {}
