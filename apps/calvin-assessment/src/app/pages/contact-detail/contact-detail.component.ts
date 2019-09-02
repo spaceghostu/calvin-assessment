@@ -1,4 +1,4 @@
-import { Component, OnInit, Sanitizer, SecurityContext } from '@angular/core';
+import { Component, OnInit, Sanitizer, SecurityContext, HostBinding } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Store } from '@ngrx/store';
 import { ContactsState, Entity } from '../../contacts/+state/contacts.reducer';
@@ -11,13 +11,18 @@ import { Observable } from 'rxjs';
 import { take } from 'rxjs/operators';
 import { ContactsService } from '../../contacts/contacts.service';
 import { MdcSnackbar } from '@angular-mdc/web';
+import { pageTransition } from '../animations/pageTransition';
 
 @Component({
   selector: 'calvin-assessment-contact-detail',
   templateUrl: './contact-detail.component.html',
+  animations: [pageTransition],
   styleUrls: ['./contact-detail.component.scss']
 })
 export class ContactDetailComponent implements OnInit {
+  @HostBinding('@pageTransition') pageTransition = '';
+
+  
   contact$: Observable<Entity>;
   loaded$: Observable<Boolean>;
   editMode = false;

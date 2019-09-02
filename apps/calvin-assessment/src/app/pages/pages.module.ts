@@ -6,7 +6,7 @@ import { ContactDetailComponent } from './contact-detail/contact-detail.componen
 import { AppRoutingModule } from '../app-routing.module';
 import { PipesModule } from '../pipes/pipes.module';
 import { AddContactComponent } from './add-contact/add-contact.component';
-
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations'
 
 
 @NgModule({
@@ -16,6 +16,7 @@ import { AddContactComponent } from './add-contact/add-contact.component';
     MaterialsModule,
     AppRoutingModule,
     PipesModule,
+    BrowserAnimationsModule,
   ]
 })
 export class PagesModule { }
