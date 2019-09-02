@@ -6,10 +6,8 @@ export interface Entity {
   id: string,
   index: number,
   picture: string,
-  name: {
-    first: string,
-    last: string,
-  },
+  firstname: string,
+  lastname: string,
   company: string,
   email: string,
   phone: string,

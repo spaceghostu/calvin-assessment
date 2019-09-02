@@ -5,17 +5,17 @@
                         [style.backgroundImage]="sanitizedPicture()"></mdc-card-media>
         <div class="name"
              *ngIf="!editMode">
-            <h2 mdcHeadline6>{{(contact$|async).name.first}} {{(contact$|async).name.last}}</h2>
+            <h2 mdcHeadline6>{{(contact$|async).firstname}} {{(contact$|async).lastname}}</h2>
             <span>{{(contact$|async).company}}</span>
         </div>
         <div class="name"
              *ngIf="editMode">
             <mdc-text-field label="First Name"
-                            (input)="contactSnapshot.name.first=$event"
-                            [value]="contactSnapshot.name.first"></mdc-text-field>
+                            (input)="contactSnapshot.firstname=$event"
+                            [value]="contactSnapshot.firstname"></mdc-text-field>
             <mdc-text-field label="Last Name"
-                            (input)="contactSnapshot.name.last=$event"
-                            [value]="contactSnapshot.name.last"></mdc-text-field>
+                            (input)="contactSnapshot.lastname=$event"
+                            [value]="contactSnapshot.lastname"></mdc-text-field>
             <mdc-text-field label="Company"
                             (input)="contactSnapshot.company=$event"
                             [value]="contactSnapshot.company"></mdc-text-field>
@@ -57,14 +57,14 @@
                     (click)="handleSave()"
                     mdcCardAction="button">Save</button>
             <button mdc-button
-                    (click)="toggleEdit()"
+                    (click)="handleCancel()"
                     mdcCardAction="button">Cancel</button>
         </mdc-card-action-buttons>
         <mdc-card-action-icons>
             <button mdcIconButton
                     *ngIf="!editMode"
                     mdcCardAction="icon"
-                    (click)="toggleEdit()"
+                    (click)="handleEdit()"
                     icon="create"></button>
             <button mdcIconButton
                     mdcCardAction="icon"

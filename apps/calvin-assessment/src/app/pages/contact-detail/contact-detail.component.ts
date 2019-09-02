@@ -56,8 +56,8 @@ export class ContactDetailComponent implements OnInit {
   }
 
   handleEdit() {
-    this.contact$.pipe(take(1)).subscribe(contact => {
-      this.contactSnapshot = contact;
+    this.contact$.pipe(take(1)).forEach(contact => {
+      this.contactSnapshot = { ...contact };
     });
     this.editMode = true;
   }
@@ -69,12 +69,15 @@ export class ContactDetailComponent implements OnInit {
     this.editMode = false;
   }
   handleCancel() {
+    this.contact$.pipe(take(1)).forEach(contact => {
+      this.contactSnapshot = { ...contact };
+    });
     this.editMode = false;
   }
   handleDelete() {
     if (!this.contactSnapshot) {
-      this.contact$.pipe(take(1)).subscribe(contact => {
-        this.contactSnapshot = contact;
+      this.contact$.pipe(take(1)).forEach(contact => {
+        this.contactSnapshot = { ...contact };
       });
     }
     const snackbarRef = this.snackbar.open('Contact Deleted', 'Undo', {
@@ -82,7 +85,7 @@ export class ContactDetailComponent implements OnInit {
       dismiss: true
     });
     snackbarRef.afterDismiss().subscribe(reason => {
-      if ((reason = 'dismiss')) {
+      if (reason === 'dismiss') {
         this.contactsService.delete(this.contactSnapshot);
         this.router.navigate(['/contacts']);
       }
