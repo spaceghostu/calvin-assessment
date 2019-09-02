@@ -1,9 +1,13 @@
 <div [mdcElevation]="2"
-  *ngIf="loaded$|async">
+     *ngIf="loaded$|async">
+  <mdc-text-field (input)="filter=$event"
+                  class="filter"
+                  label="Filter"
+                  [value]="filter"></mdc-text-field>
   <mdc-list twoLine
             avatar>
-    <mdc-list-item *ngFor="let contact of contacts$|async"
-      [routerLink]="['/contact', contact.id]">
+    <mdc-list-item *ngFor="let contact of contacts$ | async | filter:filter"
+                   [routerLink]="['/contact', contact.id]">
       <img [src]="contact.picture"
            mdcListItemGraphic />
       <mdc-list-item-text [secondaryText]="contact.phone">{{contact.firstname}} {{contact.lastname}}
@@ -17,14 +21,14 @@
 </div>
 
 <div class="loader"
-  *ngIf="!(loaded$|async) && !(error$|async)">
+     *ngIf="!(loaded$|async) && !(error$|async)">
   <mdc-linear-progress></mdc-linear-progress>
 </div>
 
 <div class="error"
-  *ngIf="error$|async">
+     *ngIf="error$|async">
   <mdc-icon>error</mdc-icon>
   <span>{{error$|async}}</span>
   <button mdc-button
-    (click)="handleRetry()">Retry</button>
+          (click)="handleRetry()">Retry</button>
 </div>

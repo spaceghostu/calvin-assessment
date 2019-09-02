@@ -15,6 +15,7 @@ export class ContactsComponent implements OnInit {
   contacts$: Observable<Entity[]>;
   loaded$: Observable<boolean>;
   error$: Observable<string>;
+  filter: string;
 
   constructor(private store: Store<ContactsState>) {
     this.contacts$ = this.store.select(contactsQuery.getAllContacts);

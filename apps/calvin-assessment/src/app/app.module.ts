@@ -20,6 +20,7 @@ import { AngularFireModule } from '@angular/fire';
 import { AngularFirestoreModule } from '@angular/fire/firestore';
 import { NxModule } from '@nrwl/angular';
 import { storeLogger } from 'ngrx-store-logger';
+import { PipesModule } from './pipes/pipes.module';
 
 export function debug(reducer: ActionReducer<any>): ActionReducer<any> {
   return storeLogger()(reducer);
@@ -47,7 +48,8 @@ export const reducers: ActionReducerMap<any> = {
     StoreDevtoolsModule.instrument({
       maxAge: 25
     }),
-    EffectsModule.forRoot([])
+    EffectsModule.forRoot([]),
+    PipesModule
   ],
   providers: [],
   bootstrap: [AppComponent]

@@ -5,10 +5,8 @@ export const generateContact = (): Entity => {
   return {
     id: faker.id(),
     index: faker.random.number(),
-    name: {
-      first: faker.name.firstName(),
-      last: faker.name.lastName()
-    },
+    firstname: faker.name.firstName(),
+    lastname: faker.name.lastName(),
     picture: faker.image.imageUrl(),
     company: faker.company.companyName(),
     email: faker.internet.email(),
